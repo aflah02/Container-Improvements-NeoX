@@ -1,6 +1,0 @@
-
-[2026-11-20T18:28:08Z] apptainer-standard-pip-kernels-true
-$ apptainer build --bind /NS/llm-pretraining/work/afkhan/GPT-NeoX-Dev/TorchRun_Support/gpt-neox/logs/docker-build-consolidation/run-20261120T170239Z-7XVqsB/context/requirements:/requirements:ro --bind /NS/llm-pretraining/work/afkhan/GPT-NeoX-Dev/TorchRun_Support/gpt-neox/logs/docker-build-consolidation/run-20261120T170239Z-7XVqsB/pip-kernel-src:/megatron/fused_kernels:rw /NS/llm-pretraining/work/afkhan/GPT-NeoX-Dev/TorchRun_Support/gpt-neox/logs/docker-build-consolidation/run-20261120T170239Z-7XVqsB/apptainer-standard-pip-kernels-true.sif containers/apptainer/gpt-neox.def
-/NS/llm-pretraining/work/afkhan/GPT-NeoX-Dev/TorchRun_Support/gpt-neox/logs/docker-build-consolidation/build-all.sh: line 37: apptainer: command not found
-Elapsed 0.020 seconds
-[2026-11-20T18:28:08Z] apptainer-standard-pip-kernels-true FAIL (exit 127, 0s)

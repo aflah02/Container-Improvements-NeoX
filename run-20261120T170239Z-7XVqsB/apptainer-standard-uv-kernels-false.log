@@ -1,6 +1,0 @@
-
-[2026-11-20T18:28:08Z] apptainer-standard-uv-kernels-false
-Recorded command (output name elided): apptainer build --build-arg BUILD_FUSED_KERNELS=false <original-output.sif> containers/apptainer/gpt-neox.uv.def
-/NS/llm-pretraining/work/afkhan/GPT-NeoX-Dev/TorchRun_Support/gpt-neox/logs/docker-build-consolidation/build-all.sh: line 37: apptainer: command not found
-Elapsed 0.001 seconds
-[2026-11-20T18:28:08Z] apptainer-standard-uv-kernels-false FAIL (exit 127, 0s)
