@@ -87,7 +87,7 @@ main() {
     # outside the Docker build context, even when the matrix is run again.
     mkdir -- "$run_dir/context"
     cp -R --parents -- .dockerignore requirements megatron/fused_kernels \
-        containers/docker/Dockerfile{,.TE,.uv,.TE.uv} \
+        containers/docker/Dockerfile{,.TE,.B200}{,.uv} \
         containers/apptainer/gpt-neox{,.uv}.def "$run_dir/context/"
     cd -- "$run_dir/context"
     cp -R -- megatron/fused_kernels "$run_dir/pip-kernel-src"
@@ -97,6 +97,8 @@ main() {
     build_recipe docker te-pip       containers/docker/Dockerfile.TE
     build_recipe docker standard-uv  containers/docker/Dockerfile.uv
     build_recipe docker te-uv        containers/docker/Dockerfile.TE.uv
+    build_recipe docker b200-pip     containers/docker/Dockerfile.B200
+    build_recipe docker b200-uv      containers/docker/Dockerfile.B200.uv
     build_recipe apptainer standard-pip containers/apptainer/gpt-neox.def
     build_recipe apptainer standard-uv  containers/apptainer/gpt-neox.uv.def
 
