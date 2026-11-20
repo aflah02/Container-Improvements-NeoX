@@ -58,11 +58,11 @@ build_recipe() {
     for kernels in true false; do
         name="$engine-$variant-kernels-$kernels"
         args=()
-        # Leave the baseline unflagged to exercise each recipe's defaults.
+        # Leave the kernel argument unset to exercise each recipe's default.
         if [[ $kernels == false ]]; then args+=(--build-arg BUILD_FUSED_KERNELS=false); fi
 
         if [[ $engine == docker ]]; then
-            run_case "$name" docker build --progress=plain -f "$recipe" \
+            run_case "$name" docker build --pull --no-cache --progress=plain -f "$recipe" \
                 -t "gpt-neox-build-test:${name#docker-}-${run_dir##*/}" "${args[@]}" .
         else
             if [[ $variant == standard-pip ]]; then
@@ -72,7 +72,7 @@ build_recipe() {
                     args+=(--bind "$run_dir/pip-kernel-src:/megatron/fused_kernels:rw")
                 fi
             fi
-            run_case "$name" apptainer build "${args[@]}" "$run_dir/$name.sif" "$recipe"
+            run_case "$name" apptainer build --disable-cache "${args[@]}" "$run_dir/$name.sif" "$recipe"
         fi
     done
 }
