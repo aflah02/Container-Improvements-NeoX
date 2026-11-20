@@ -4,6 +4,8 @@ The November 20 run on `sws-2h100-02` built all eight non-B200 Docker configurat
 
 The report contains the 12 default-attention cases from the original run at GPT-NeoX revision `f2bfbe2`. The uv recipes in the saved build context were updated after that run. [Combined log](run-20261120T170239Z-7XVqsB/build.log)
 
+![Observed Docker build speedups for pip versus uv and for fused kernels enabled versus disabled. Values above 1× indicate a shorter build.](run-20261120T170239Z-7XVqsB/docker-build-speedups.png)
+
 To run the matrix from this repository, point the runner at a local GPT-NeoX checkout containing the container recipes. Each invocation writes its logs to a new run directory.
 
 ```bash
