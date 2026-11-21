@@ -9,3 +9,5 @@ Point the runner at a local GPT-NeoX checkout on the `docker-build-consolidation
 ```bash
 NEOX_CHECKOUT=/path/to/gpt-neox ./build-all.sh --tmux
 ```
+
+Add `--b200-only` to run the four B200 Docker builds with the same logs and timing summary.

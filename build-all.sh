@@ -11,13 +11,19 @@ if [[ ! -f "$repo/containers/docker/Dockerfile" ]]; then
     exit 2
 fi
 
-if (( $# )); then
-    if [[ $# != 1 || $1 != --tmux ]]; then
-        printf 'Usage: %s [--tmux]\n' "$0" >&2
-        exit 2
-    fi
+detached=false
+build_options=()
+for option in "$@"; do
+    case "$option" in
+        --tmux) detached=true ;;
+        --b200-only) build_options=(--b200-only) ;;
+        *) printf 'Usage: %s [--tmux] [--b200-only]\n' "$0" >&2; exit 2 ;;
+    esac
+done
+
+if [[ $detached == true ]]; then
     tmux new-session -d -s gpt-neox-build -c "$repo" \
-        env "PATH=$PATH" "NEOX_CHECKOUT=$repo" bash "$script"
+        env "PATH=$PATH" "NEOX_CHECKOUT=$repo" bash "$script" "${build_options[@]}"
     printf 'Attach with tmux attach -t gpt-neox-build\nRun logs are under %s/\n' "$script_dir"
     exit 0
 fi
@@ -55,6 +61,9 @@ build_recipe() {
     local engine=$1 variant=$2 recipe=$3
     local kernels name
     local -a args
+    if [[ ${build_options[0]:-} == --b200-only && $variant != b200-* ]]; then
+        return 0
+    fi
     for kernels in true false; do
         name="$engine-$variant-kernels-$kernels"
         args=()
