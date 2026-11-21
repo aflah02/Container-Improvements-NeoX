@@ -11,3 +11,9 @@ NEOX_CHECKOUT=/path/to/gpt-neox ./build-all.sh --tmux
 ```
 
 Add `--b200-only` to run the four B200 Docker builds with the same logs and timing summary.
+
+## Measured Docker build times
+
+All 12 Docker configurations built successfully across two runs on `sws-2h100-02`. The November 20 run used `f8c01c4` for the standard and Transformer Engine images. The November 21 B200 rerun used `88c7227` after the UID fix. Both revisions predate the dependency updates on the rebased branch. The host lacked `apptainer`, so the native Apptainer cases have no build timings. [November 20 summary](run-20261120T211324Z-UafkfP/summary.tsv) · [B200 rerun summary](run-20261121T082946Z-7K25n5/summary.tsv)
+
+![Docker build times and speedups for pip versus uv and fused kernels enabled versus disabled](docker-build-speedups.png)
