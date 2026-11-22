@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
 # Run directly, or pass --tmux to start a detached gpt-neox-build session.
-# From a separate results repository, set NEOX_CHECKOUT to the GPT-NeoX checkout.
+# Set NEOX_CHECKOUT to use another checkout containing both recipe sets.
 set -euo pipefail
 
 script=$(realpath -- "${BASH_SOURCE[0]}")
 script_dir=$(dirname -- "$script")
 repo=$(git -C "${NEOX_CHECKOUT:-$script_dir}" rev-parse --show-toplevel)
-if [[ ! -f "$repo/containers/docker/Dockerfile" ]]; then
-    printf 'Set NEOX_CHECKOUT to the GPT-NeoX checkout containing containers/docker/Dockerfile.\n' >&2
+if [[ ! -f "$repo/containers/docker/Dockerfile" || ! -f "$repo/containers/docker/Dockerfile.uv" ]]; then
+    printf 'Run from Container-Improvements-NeoX or set NEOX_CHECKOUT to a checkout with both pip and uv recipes.\n' >&2
     exit 2
 fi
 

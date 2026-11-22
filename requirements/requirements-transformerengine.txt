@@ -1,0 +1,2 @@
+flash-attn==2.6.3
+transformer-engine[pytorch]==1.12

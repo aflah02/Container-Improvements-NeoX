@@ -4,13 +4,15 @@ The runner tests the standard, Transformer Engine, and B200 Docker images and th
 
 Each Docker build uses `--pull --no-cache` to check its base image tags and rerun the Dockerfile steps. Docker can reuse base image layers already present on the host. Each Apptainer build uses `--disable-cache` to bypass its image cache.
 
-Point the runner at a local GPT-NeoX checkout on the `docker-build-consolidation` branch. Each invocation writes per-case logs, a combined `build.log`, and timings in `summary.tsv` to a new `run-*` directory beside the script.
+This repository preserves both sets of recipes and their build inputs from GPT-NeoX commit `9603b14`, before the switch to uv-only images. To rerun the comparison, run the following from this repository. Set `NEOX_CHECKOUT` only to use a different checkout containing both sets of recipes. [Archived container guide](containers/README.md) · [GPT-NeoX source revision](https://github.com/aflah02/gpt-neox/tree/9603b14405adaaf7c89e63e1deb64a5ecda2daba)
 
 ```bash
-NEOX_CHECKOUT=/path/to/gpt-neox ./build-all.sh --tmux
+./build-all.sh --tmux
 ```
 
 Add `--b200-only` to run the four B200 Docker builds with the same logs and timing summary.
+
+Each recorded run directory contains its combined and per-case logs, timing summary, and a `build-inputs.tar.gz` archive of the exact `context/` and `pip-kernel-src/` directories used for that run. The [original PR draft](pull-request.md) records the comparison before review.
 
 ## Measured Docker build times
 
